@@ -14,56 +14,67 @@
 
 class MyHashMap {
     
-    int PRIME = 997;
-    List<Node>[] buckets;
+    int PRIME = 997; // Prime number used for bucket size to reduce collisions
+    List<Node>[] buckets; // Array of buckets (each bucket is a linked list of nodes)
+
+    // Hash function to compute index for a key
     int hash(int key) {
         return (31 * key + 17) % PRIME;
     }
+
+    // Constructor initializes the buckets array
     public MyHashMap() {
         buckets = new List[PRIME];
     }
-    
+
     public void put(int key, int value) {
-        int hsh = hash(key);
-        Node node = new Node(key, value);
+        int hsh = hash(key); // Compute bucket index
+        Node node = new Node(key, value); // Create new node with key and value
+
+        // If bucket is empty, initialize it
         if(buckets[hsh] == null)
             buckets[hsh] = new LinkedList<Node>();
-        for(int i = 0;i<buckets[hsh].size();i++){
+
+        // Search for existing key and update value if found
+        for(int i = 0; i < buckets[hsh].size(); i++){
             if(key == buckets[hsh].get(i).key){
-                buckets[hsh].set(i, node);
+                buckets[hsh].set(i, node); // Update existing key
                 return;
-                }
+            }
         }
+        // If key not found, add new node to bucket
         buckets[hsh].add(node);
-        //System.out.println("ArrayList: " + buckets[hsh]);
     }
-    
+
     public int get(int key) {
-        int hsh = hash(key);
+        int hsh = hash(key); // Compute bucket index
+
         if(buckets[hsh] == null)
-            return -1;
-        for(int i = 0;i<buckets[hsh].size();i++){
+            return -1; // Key not found
+
+        // Search for the key in the bucket
+        for(int i = 0; i < buckets[hsh].size(); i++){
             if(key == buckets[hsh].get(i).key)
-                return buckets[hsh].get(i).value;
+                return buckets[hsh].get(i).value; // Return corresponding value
         }
-        return -1;
-        
+        return -1; // Key not found
     }
     
     public void remove(int key) {
-        int hsh = hash(key);
+        int hsh = hash(key); // Compute bucket index
         if(buckets[hsh] == null)
-            return;
-        for(int i = 0;i<buckets[hsh].size();i++){
+            return; // Nothing to remove
+        // Search and remove node with matching key
+        for(int i = 0; i < buckets[hsh].size(); i++){
             if(key == buckets[hsh].get(i).key){
                 buckets[hsh].remove(i);
                 break;
-                }
+            }
         }
     }
 }
 
-class Node{
+class Node {
     int key;
     int value;
 
@@ -72,6 +83,7 @@ class Node{
         this.value = value;
     }
 }
+
 
 /**
  * Your MyHashMap object will be instantiated and called as such:
