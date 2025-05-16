@@ -15,7 +15,9 @@
 // Any problem you faced while coding this : No
 
 class MyQueue {
+    //Stack for inputting elements
     private Stack<Integer> input;
+    //Stack for popping elements from
     private Stack<Integer> output;
 
     public MyQueue() {
@@ -24,16 +26,20 @@ class MyQueue {
     }
 
     public void push(int x) {
+        //Pushing into input Queue
         input.push(x);
     }
 
     public int pop() {
+        //Peeking it so that it gets element from input Stack to output Stack if it is empty
         peek();
         return output.pop();
     }
 
     public int peek() {
+        //checking if output stack is empty so get elements from input stack
         if (output.isEmpty()) {
+            //looping for all elements in Input Stack
             while (!input.isEmpty()) {
                 output.push(input.pop());
             }
@@ -42,6 +48,7 @@ class MyQueue {
     }
 
     public boolean empty() {
+        //just using the inbuilt stack functions to check if both are empty
         return input.isEmpty() && output.isEmpty();
     }
 }
