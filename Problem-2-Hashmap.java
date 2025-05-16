@@ -1,3 +1,17 @@
+/*
+ * Implements a basic HashMap using separate chaining with linked lists.
+ * 1. buckets: array of linked lists to handle collisions.
+ * 2. hash(key): computes index using a custom hash function and PRIME bucket size.
+
+ * - put(key, value): hashes the key, searches the corresponding bucket; if key exists, updates the value; otherwise, adds a new node.
+ * - get(key): searches the hashed bucket for the key and returns its value; returns -1 if not found.
+ * - remove(key): searches the hashed bucket and removes the node if the key matches.
+ */
+// Time Complexity : O(1) average, O(n) worst-case (if all keys hash to the same bucket) for all functions
+// Space Complexity : O(n), where n is the number of keys stored.
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No (Explored multiple ways)
+
 class MyHashMap {
     
     int PRIME = 997;
